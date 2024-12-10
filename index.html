@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Provider - Scegli la tua lingua</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s infinite alternate ease-in-out;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            animation: textTransition 10s infinite ease-in-out;
+        }
+
+        .language-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .language {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .language img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .language:hover {
+            transform: scale(1.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes textTransition {
+            0%, 25% { opacity: 1; transform: translateY(0); }
+            30%, 70% { opacity: 0; transform: translateY(-20px); }
+            75%, 100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .language-container {
+                gap: 20px;
+            }
+
+            .language {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Trip Provider</h1>
+    <div class="subtitle">Scegli la tua lingua</div>
+    <div class="language-container">
+        <div class="language" onclick="setLanguage('en')">
+            <img src="uk.png" alt="English">
+        </div>
+        <div class="language" onclick="setLanguage('it')">
+            <img src="it.png" alt="Italian">
+        </div>
+        <div class="language" onclick="setLanguage('fr')">
+            <img src="fr.png" alt="French">
+        </div>
+        <div class="language" onclick="setLanguage('de')">
+            <img src="gr.png" alt="German">
+        </div>
+    </div>
+    <footer>© 2024 Trip Provider. All rights reserved.</footer>
+
+    <script>
+        function setLanguage(language) {
+            localStorage.setItem('selectedLanguage', language);
+            window.location.href = 'cards.html';
+        }
+
+        // Text Transition
+        const subtitle = document.querySelector('.subtitle');
+        const languages = ["Scegli la tua lingua", "Choose your language", "Choisissez votre langue", "Wählen Sie Ihre Sprache"];
+        let index = 0;
+
+        function updateText() {
+            subtitle.style.opacity = "0";
+            setTimeout(() => {
+                subtitle.textContent = languages[index];
+                subtitle.style.opacity = "1";
+                index = (index + 1) % languages.length;
+            }, 500);
+        }
+        setInterval(updateText, 3000);
+    </script>
+</body>
+</html>
+
+
